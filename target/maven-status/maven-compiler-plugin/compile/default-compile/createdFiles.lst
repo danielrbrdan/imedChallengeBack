@@ -1,0 +1,11 @@
+com/challenge/conexa/controller/ProfessionalController.class
+com/challenge/conexa/model/ProfessionalModel.class
+com/challenge/conexa/model/PatientModel.class
+com/challenge/conexa/repository/ProfessionalRepository.class
+com/challenge/conexa/service/PatientService.class
+com/challenge/conexa/service/ProfessionalService.class
+com/challenge/conexa/model/TestModel.class
+com/challenge/conexa/ConexaApplication.class
+com/challenge/conexa/controller/PatientController.class
+com/challenge/conexa/model/InsuranceModel.class
+com/challenge/conexa/repository/PatientRepository.class

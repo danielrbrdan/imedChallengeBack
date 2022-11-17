@@ -1,0 +1,11 @@
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/service/PatientService.java
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/model/PatientModel.java
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/service/ProfessionalService.java
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/model/TestModel.java
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/model/InsuranceModel.java
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/repository/ProfessionalRepository.java
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/controller/PatientController.java
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/ConexaApplication.java
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/controller/ProfessionalController.java
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/model/ProfessionalModel.java
+/home/danielramos/Documentos/challenge/conexa-app/conexa/src/main/java/com/challenge/conexa/repository/PatientRepository.java
