@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
 
-    public static final int TOKEN_EXPIRATION = 600_000;
+    public static final int TOKEN_EXPIRATION = 9000_000;
     public static final String TOKEN_PASS = "463408a1-54c9-4307-bb1c-6cced559f5a7";
 
     private final AuthenticationManager authenticationManager;

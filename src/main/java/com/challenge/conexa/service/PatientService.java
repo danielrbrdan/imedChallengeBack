@@ -19,4 +19,9 @@ public class PatientService {
         return patientRepository.findAllByNameAndStatusOnline(name, statusOnline);
     }
 
+    public Patient findByLogin(String username) {
+        return patientRepository.findByLogin(username);
+
+    }
+
 }
