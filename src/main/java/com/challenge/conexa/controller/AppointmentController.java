@@ -27,6 +27,7 @@ import com.challenge.conexa.model.Appointment;
 import com.challenge.conexa.model.AppointmentDTO;
 import com.challenge.conexa.model.Patient;
 import com.challenge.conexa.model.Professional;
+import com.challenge.conexa.repository.UserRepository;
 import com.challenge.conexa.service.AppointmentService;
 import com.challenge.conexa.service.PatientService;
 import com.challenge.conexa.service.ProfessionalService;
@@ -39,17 +40,22 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @GetMapping(value = "/findAllByProfessionalId/{id}")
-    public ResponseEntity<List<Appointment>> findAllByProfessionalId(@PathVariable Integer id) {
+    public ResponseEntity<List<Appointment>> findAllByProfessionalId(@PathVariable Long id) {
         return ResponseEntity.ok().body(appointmentService.findAllByProfessionalId(id));
     }
 
     @GetMapping(value = "/findAllByProfessionalIdAndDate/{id}/{date}")
-    public ResponseEntity<List<Appointment>> findAllByProfessionalIdAndDate(@PathVariable Integer id, @PathVariable String date) throws ParseException {
+    public ResponseEntity<List<Appointment>> findAllByProfessionalIdAndDate(@PathVariable Long id, @PathVariable String date) throws ParseException {
         return ResponseEntity.ok().body(appointmentService.findAllByProfessionalIdAndDate(id, date));
     }
+
     @GetMapping(value = "/findAll")
     public ResponseEntity<List<Appointment>> findAll() {
         return ResponseEntity.ok().body(appointmentService.findAll());
+    }
+    @GetMapping(value = "/findAllProfessionalAppointments")
+    public ResponseEntity<List<Appointment>> findAllProfessionalAppointments() {
+        return ResponseEntity.ok().body(appointmentService.findAllProfessionalAppointments());
     }
 
     @PostMapping("/save")

@@ -9,7 +9,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.challenge.conexa.model.Appointment;
 import com.challenge.conexa.model.AppointmentDTO;
+import com.challenge.conexa.model.User;
 import com.challenge.conexa.repository.AppointmentRepository;
+import com.challenge.conexa.repository.UserRepository;
 
 @Service
 public class AppointmentService {
@@ -22,19 +24,22 @@ public class AppointmentService {
     @Autowired
     private ProfessionalService professionalService;
 
-    public List<Appointment> findAllByProfessionalId(Integer id) {
+    @Autowired
+    private UserRepository userRepository;
+
+    public List<Appointment> findAllByProfessionalId(Long id) {
         return appointmentRepository.findAllByProfessionalId(id);
     }
 
     public Appointment save(AppointmentDTO appointmentDTO) throws Exception {
-        if(appointmentRepository.existsByDateAndTime(appointmentDTO.getDate(),appointmentDTO.getTime())){
+        if(appointmentRepository.existsByDateAndTimeAndProfessionalId(appointmentDTO.getDate(),appointmentDTO.getTime(),appointmentDTO.getProfessionalId())){
             throw new Exception("ProfessionalAlreadyInUseException");
         }
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String login = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         Appointment appointment = new Appointment();
         appointment.setProfessional(professionalService.findById(appointmentDTO.getProfessionalId()).get());
-        appointment.setPatient(patientService.findByLogin(username));
+        appointment.setPatient(patientService.findByLogin(login));
         appointment.setTime(appointmentDTO.getTime());
         appointment.setDate(appointmentDTO.getDate());
 
@@ -42,20 +47,26 @@ public class AppointmentService {
     }
 
     public List<Appointment> findAll() {
-        return appointmentRepository.findAll();
+        String login = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user = userRepository.findByLogin(login).get();
+        return appointmentRepository.findAllByPatientId(user.getId());
     }
 
-    public  List<Appointment> findAllByProfessionalIdAndDate(Integer id, String date) {
+    public List<Appointment> findAllProfessionalAppointments() {
+        String login = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user = userRepository.findByLogin(login).get();
+        return appointmentRepository.findAllByProfessionalId(user.getId());
+    }
+
+    public  List<Appointment> findAllByProfessionalIdAndDate(Long id, String date) {
         return appointmentRepository.findAllByProfessionalIdAndDate(id, date);
 
-    }
-
-    public boolean existsByDateAndTime(String date, String time) {
-        return appointmentRepository.existsByDateAndTime(date, time);
     }
 
     public void deleteById(Long id) {
         appointmentRepository.deleteById(id);
     }
+
+    
 
 }

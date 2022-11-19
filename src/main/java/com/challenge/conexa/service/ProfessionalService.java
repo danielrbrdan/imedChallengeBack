@@ -3,8 +3,10 @@ package com.challenge.conexa.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.challenge.conexa.model.Patient;
 import com.challenge.conexa.model.Professional;
 import com.challenge.conexa.repository.ProfessionalRepository;
 
@@ -20,11 +22,10 @@ public class ProfessionalService {
         return professionalRepository.findAll();
     }
 
-    public Optional<Professional> findById(Integer professionalId) {
+    public Optional<Professional> findById(Long professionalId) {
         return professionalRepository.findById(professionalId);
 
     }
 
-    
     
 }
