@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.challenge.conexa.model.Patient;
+import com.challenge.conexa.model.Professional;
 import com.challenge.conexa.model.User;
+import com.challenge.conexa.repository.PatientRepository;
+import com.challenge.conexa.repository.ProfessionalRepository;
 import com.challenge.conexa.repository.UserRepository;
 
 
@@ -23,11 +27,17 @@ import com.challenge.conexa.repository.UserRepository;
 public class UserController {
 
     private final UserRepository repository;
+    private final PatientRepository patientRepository;
+    private final ProfessionalRepository professionalRepository;
+
     private final PasswordEncoder encoder;
 
-    public UserController(UserRepository repository, PasswordEncoder encoder) {
+    public UserController(UserRepository repository, PasswordEncoder encoder,PatientRepository patientRepository,ProfessionalRepository professionalRepository) {
         this.repository = repository;
         this.encoder = encoder;
+        this.patientRepository = patientRepository;
+        this.professionalRepository = professionalRepository;
+
     }
 
     @CrossOrigin(value = "*")
@@ -36,10 +46,16 @@ public class UserController {
         return ResponseEntity.ok(repository.findAll());
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<User> save(@RequestBody User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        return ResponseEntity.ok(repository.save(user));
+    @PostMapping("/save/professional")
+    public ResponseEntity<User> save(@RequestBody Professional professional) {
+        professional.setPassword(encoder.encode(professional.getPassword()));
+        return ResponseEntity.ok(professionalRepository.save(professional));
+    }
+
+    @PostMapping("/save/patient")
+    public ResponseEntity<User> save(@RequestBody Patient patient) {
+        patient.setPassword(encoder.encode(patient.getPassword()));
+        return ResponseEntity.ok(patientRepository.save(patient));
     }
 
     @GetMapping("/validPass")

@@ -1,6 +1,7 @@
 package com.challenge.conexa.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,11 @@ public class ProfessionalService {
 
     public List<Professional> findAll() {
         return professionalRepository.findAll();
+    }
+
+    public Optional<Professional> findById(Integer professionalId) {
+        return professionalRepository.findById(professionalId);
+
     }
 
     

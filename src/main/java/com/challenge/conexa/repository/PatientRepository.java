@@ -18,4 +18,6 @@ public interface PatientRepository extends CrudRepository<Patient, Long>{
 	"and online_status like :statusOnline ",
     nativeQuery = true)
     List<Patient> findAllByNameAndStatusOnline(String name, String statusOnline);
+
+    Patient findByLogin(String username);
 }
