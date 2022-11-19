@@ -16,7 +16,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "insurance")
 public class Insurance {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) 
     private Long id;
 
     @CreationTimestamp

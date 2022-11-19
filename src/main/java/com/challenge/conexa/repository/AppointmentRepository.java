@@ -14,4 +14,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     List<Appointment> findAllByProfessionalIdAndDate(Integer id, String date);
 
+    boolean existsByDateAndTime(String date, String time);
+
+    void deleteById(Long id);
+
+
 }

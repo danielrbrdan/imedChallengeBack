@@ -5,6 +5,7 @@ import java.util.Calendar;
 import lombok.Getter;
 
 public class AppointmentDTO {
+    Integer id;
     Integer professionalId;
     String time;
     String date;
@@ -26,6 +27,12 @@ public class AppointmentDTO {
     }
     public void setDate(String date) {
         this.date = date;
+    }
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     
