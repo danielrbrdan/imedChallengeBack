@@ -16,40 +16,53 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.conexa.model.Patient;
+import com.challenge.conexa.model.PatientDTO;
 import com.challenge.conexa.model.Professional;
+import com.challenge.conexa.model.ProfessionalDTO;
 import com.challenge.conexa.model.User;
-import com.challenge.conexa.repository.PatientRepository;
-import com.challenge.conexa.repository.ProfessionalRepository;
 import com.challenge.conexa.repository.UserRepository;
+import com.challenge.conexa.service.PatientService;
+import com.challenge.conexa.service.ProfessionalService;
 
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
     private final UserRepository repository;
-    private final PatientRepository patientRepository;
-    private final ProfessionalRepository professionalRepository;
+    private final PatientService patientService;
+    private final ProfessionalService professionalService;
 
     private final PasswordEncoder encoder;
 
-    public UserController(UserRepository repository, PasswordEncoder encoder,PatientRepository patientRepository,ProfessionalRepository professionalRepository) {
+    public UserController(UserRepository repository, PasswordEncoder encoder,PatientService patientService,ProfessionalService professionalService) {
         this.repository = repository;
         this.encoder = encoder;
-        this.patientRepository = patientRepository;
-        this.professionalRepository = professionalRepository;
+        this.patientService = patientService;
+        this.professionalService = professionalService;
 
+    }
+
+    @PostMapping("/save/professional")
+    public ResponseEntity<Professional> save(@RequestBody Professional professional) {
+        professional.setPassword(encoder.encode(professional.getPassword()));
+        return ResponseEntity.ok(professionalService.save(professional));
+    }
+
+    @PostMapping("/save/patient")
+    public ResponseEntity<Patient> save(@RequestBody Patient patient) {
+        patient.setPassword(encoder.encode(patient.getPassword()));
+        return ResponseEntity.ok(patientService.save(patient));
     }
 
     @GetMapping("/getUserType")
     public ResponseEntity<String> getUserType() {
         String login = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         User user = repository.findByLogin(login).get();
-        if(patientRepository.findById(user.getId()).isPresent()){
+        if(patientService.findById(user.getId()).isPresent()){
             return ResponseEntity.ok("PATIENT");
         }
 
-        if(professionalRepository.findById(user.getId()).isPresent()){
+        if(professionalService.findById(user.getId()).isPresent()){
             return ResponseEntity.ok("PROFESSIONAL");
         }
 
@@ -59,18 +72,6 @@ public class UserController {
     @GetMapping("/listAll")
     public ResponseEntity<List<User>> listAll() {
         return ResponseEntity.ok(repository.findAll());
-    }
-
-    @PostMapping("/save/professional")
-    public ResponseEntity<User> save(@RequestBody Professional professional) {
-        professional.setPassword(encoder.encode(professional.getPassword()));
-        return ResponseEntity.ok(professionalRepository.save(professional));
-    }
-
-    @PostMapping("/save/patient")
-    public ResponseEntity<User> save(@RequestBody Patient patient) {
-        patient.setPassword(encoder.encode(patient.getPassword()));
-        return ResponseEntity.ok(patientRepository.save(patient));
     }
 
     @GetMapping("/validPass")

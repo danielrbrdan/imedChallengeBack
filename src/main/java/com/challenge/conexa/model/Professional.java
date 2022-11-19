@@ -18,8 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "professional")
 public class Professional extends User{
-    private ZonedDateTime date_created;
-    
     private String name;
     private String crm;
     private String status;
@@ -40,10 +38,6 @@ public class Professional extends User{
         orphanRemoval = true
     )
     private List<Insurance> insurances;
-
-    public void setDate_created(ZonedDateTime date_created) {
-        this.date_created = date_created;
-    }
 
     public String getName() {
         return name;
