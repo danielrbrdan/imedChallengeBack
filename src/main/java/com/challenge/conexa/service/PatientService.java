@@ -2,6 +2,9 @@ package com.challenge.conexa.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.stereotype.Service;
 
 import com.challenge.conexa.model.Patient;
@@ -22,6 +25,10 @@ public class PatientService {
     public Patient findByLogin(String username) {
         return patientRepository.findByLogin(username);
 
+    }
+    
+    public void incrementPatientAppointments(Long id) {
+        patientRepository.incrementPatientAppointments(id);
     }
 
 }

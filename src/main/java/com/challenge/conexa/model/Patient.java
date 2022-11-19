@@ -3,6 +3,7 @@ package com.challenge.conexa.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,7 +15,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "patient")
 public class Patient extends User{
     private String name;
-    private String totalAppointment;
+
+    @Column(name="total_appointment")
+    private Long totalAppointment;
     private String onlineStatus;
 
     @OneToMany(
@@ -37,12 +40,12 @@ public class Patient extends User{
     }
 
 
-    public String getTotalAppointment() {
+    public Long getTotalAppointment() {
         return totalAppointment;
     }
 
 
-    public void setTotalAppointment(String totalAppointment) {
+    public void setTotalAppointment(Long totalAppointment) {
         this.totalAppointment = totalAppointment;
     }
 
