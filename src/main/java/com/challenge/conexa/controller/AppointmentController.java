@@ -10,6 +10,7 @@ import java.util.Locale;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -63,8 +64,8 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.save(appointmentDTO));
     }
    
-    @PostMapping("/{id}")
     @Transactional
+    @PostMapping("/{id}")
     @CrossOrigin(origins = "*")
     public void delete(@PathVariable Long id) throws Exception {
         appointmentService.deleteById(id);

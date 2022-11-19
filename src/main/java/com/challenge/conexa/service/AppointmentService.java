@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.challenge.conexa.model.Appointment;
 import com.challenge.conexa.model.AppointmentDTO;
+import com.challenge.conexa.model.Patient;
 import com.challenge.conexa.model.User;
 import com.challenge.conexa.repository.AppointmentRepository;
 import com.challenge.conexa.repository.UserRepository;
@@ -38,11 +39,13 @@ public class AppointmentService {
 
         String login = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         Appointment appointment = new Appointment();
+        Patient patient = patientService.findByLogin(login);
         appointment.setProfessional(professionalService.findById(appointmentDTO.getProfessionalId()).get());
-        appointment.setPatient(patientService.findByLogin(login));
+        appointment.setPatient(patient);
         appointment.setTime(appointmentDTO.getTime());
         appointment.setDate(appointmentDTO.getDate());
-
+        
+        patientService.incrementPatientAppointments(patient.getId());
         return appointmentRepository.save(appointment);
     }
 
