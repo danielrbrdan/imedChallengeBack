@@ -5,15 +5,15 @@ import java.util.Calendar;
 import lombok.Getter;
 
 public class AppointmentDTO {
-    Integer id;
-    Integer professionalId;
+    Long id;
+    Long professionalId;
     String time;
     String date;
 
-    public Integer getProfessionalId() {
+    public Long getProfessionalId() {
         return professionalId;
     }
-    public void setProfessionalId(Integer professionalId) {
+    public void setProfessionalId(Long professionalId) {
         this.professionalId = professionalId;
     }
     public String getTime() {
@@ -28,10 +28,10 @@ public class AppointmentDTO {
     public void setDate(String date) {
         this.date = date;
     }
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -8,15 +8,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.challenge.conexa.model.Appointment;
 
-public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
+public interface AppointmentRepository extends JpaRepository<Appointment, Long>  {
 
-    List<Appointment> findAllByProfessionalId(Integer id);
+    List<Appointment> findAllByProfessionalId(Long id);
 
-    List<Appointment> findAllByProfessionalIdAndDate(Integer id, String date);
-
-    boolean existsByDateAndTime(String date, String time);
+    List<Appointment> findAllByProfessionalIdAndDate(Long id, String date);
 
     void deleteById(Long id);
+
+    boolean existsByDateAndTimeAndProfessionalId(String date, String time, Long professionalId);
+
+    List<Appointment> findAllByPatientId(Long id);
 
 
 }
