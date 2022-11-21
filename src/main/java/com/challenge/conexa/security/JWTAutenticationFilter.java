@@ -22,14 +22,14 @@ import com.challenge.conexa.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
+public class JWTAutenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     public static final int TOKEN_EXPIRATION = 9000_000;
-    public static final String TOKEN_PASS = "463408a1-54c9-4307-bb1c-6cced559f5a7";
+    public static final String TOKEN_PASS = "ecd7e908-0046-49d7-a5ff-1542d8548345";
 
     private final AuthenticationManager authenticationManager;
 
-    public JWTAutenticarFilter(AuthenticationManager authenticationManager) {
+    public JWTAutenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
@@ -63,7 +63,7 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
 
         String token = JWT.create().
                 withSubject(userData.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
+                //.withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
                 .sign(Algorithm.HMAC512(TOKEN_PASS));
 
         response.getWriter().write(token);
