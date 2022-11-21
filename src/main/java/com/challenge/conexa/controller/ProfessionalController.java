@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.conexa.model.Patient;
 import com.challenge.conexa.model.Professional;
 import com.challenge.conexa.service.ProfessionalService;
-
-import lombok.Data;
 
 @RestController
 @RequestMapping(value = "/professional")

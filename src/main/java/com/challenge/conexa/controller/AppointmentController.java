@@ -1,22 +1,13 @@
 package com.challenge.conexa.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,12 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.conexa.model.Appointment;
 import com.challenge.conexa.model.AppointmentDTO;
-import com.challenge.conexa.model.Patient;
-import com.challenge.conexa.model.Professional;
-import com.challenge.conexa.repository.UserRepository;
 import com.challenge.conexa.service.AppointmentService;
-import com.challenge.conexa.service.PatientService;
-import com.challenge.conexa.service.ProfessionalService;
 
 
 @RestController
