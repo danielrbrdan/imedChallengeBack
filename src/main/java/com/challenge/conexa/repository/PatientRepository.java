@@ -2,7 +2,6 @@ package com.challenge.conexa.repository;
 
 import java.util.List;
 
-import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.Modifying;

@@ -12,8 +12,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "insurance")
+@Getter
+@Setter
 public class Insurance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) 

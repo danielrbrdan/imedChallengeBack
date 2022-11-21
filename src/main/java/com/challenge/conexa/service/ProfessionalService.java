@@ -31,5 +31,9 @@ public class ProfessionalService {
         return professionalRepository.save(professional);
     }
 
+    public List<Professional> search(String key) {
+        return professionalRepository.search(key);
+    }
+
     
 }

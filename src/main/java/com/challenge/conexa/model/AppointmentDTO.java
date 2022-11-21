@@ -1,9 +1,5 @@
 package com.challenge.conexa.model;
 
-import java.util.Calendar;
-
-import lombok.Getter;
-
 public class AppointmentDTO {
     private Long id;
     private Long professionalId;
