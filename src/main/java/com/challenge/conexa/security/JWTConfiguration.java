@@ -16,12 +16,12 @@ import com.challenge.conexa.service.UserDetailServiceImpl;
 
 
 @EnableWebSecurity
-public class JWTConfiguracao extends WebSecurityConfigurerAdapter {
+public class JWTConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailServiceImpl userService;
     private final PasswordEncoder passwordEncoder;
 
-    public JWTConfiguracao(UserDetailServiceImpl userService, PasswordEncoder passwordEncoder) {
+    public JWTConfiguration(UserDetailServiceImpl userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -40,8 +40,8 @@ public class JWTConfiguracao extends WebSecurityConfigurerAdapter {
 
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new JWTAutenticarFilter(authenticationManager()))
-                .addFilter(new JWTValidarFilter(authenticationManager()))
+                .addFilter(new JWTAutenticationFilter(authenticationManager()))
+                .addFilter(new JWTValidationFilter(authenticationManager()))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 

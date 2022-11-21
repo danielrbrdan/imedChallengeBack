@@ -17,7 +17,7 @@ public class Patient extends User{
     private String name;
 
     @Column(name="total_appointment")
-    private Long totalAppointment;
+    private Long totalAppointment = (long) 0;
     private String onlineStatus;
 
     @OneToMany(

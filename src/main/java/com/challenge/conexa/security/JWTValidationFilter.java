@@ -16,12 +16,12 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
-public class JWTValidarFilter extends BasicAuthenticationFilter {
+public class JWTValidationFilter extends BasicAuthenticationFilter {
 
     public static final String HEADER_ATRIBUTO = "Authorization";
     public static final String ATRIBUTO_PREFIXO = "Bearer ";
 
-    public JWTValidarFilter(AuthenticationManager authenticationManager) {
+    public JWTValidationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
@@ -51,7 +51,7 @@ public class JWTValidarFilter extends BasicAuthenticationFilter {
 
     private UsernamePasswordAuthenticationToken getAuthenticationToken(String token) {
 
-        String user = JWT.require(Algorithm.HMAC512(JWTAutenticarFilter.TOKEN_PASS))
+        String user = JWT.require(Algorithm.HMAC512(JWTAutenticationFilter.TOKEN_PASS))
                 .build()
                 .verify(token)
                 .getSubject();
