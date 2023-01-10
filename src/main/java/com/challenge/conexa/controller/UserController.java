@@ -17,44 +17,38 @@ import org.springframework.web.bind.annotation.RestController;
 import com.challenge.conexa.model.Patient;
 import com.challenge.conexa.model.Professional;
 import com.challenge.conexa.model.User;
-import com.challenge.conexa.repository.UserRepository;
 import com.challenge.conexa.service.PatientService;
 import com.challenge.conexa.service.ProfessionalService;
+import com.challenge.conexa.service.UserService;
+
+import lombok.AllArgsConstructor;
 
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-    private final UserRepository repository;
+    private final UserService userService;
     private final PatientService patientService;
     private final ProfessionalService professionalService;
-
     private final PasswordEncoder encoder;
 
-    public UserController(UserRepository repository, PasswordEncoder encoder,PatientService patientService,ProfessionalService professionalService) {
-        this.repository = repository;
-        this.encoder = encoder;
-        this.patientService = patientService;
-        this.professionalService = professionalService;
-
-    }
-
-    @PostMapping("/save/professional")
+    @PostMapping("/professional")
     public ResponseEntity<Professional> save(@RequestBody Professional professional) {
         professional.setPassword(encoder.encode(professional.getPassword()));
         return ResponseEntity.ok(professionalService.save(professional));
     }
 
-    @PostMapping("/save/patient")
+    @PostMapping("/patient")
     public ResponseEntity<Patient> save(@RequestBody Patient patient) {
         patient.setPassword(encoder.encode(patient.getPassword()));
         return ResponseEntity.ok(patientService.save(patient));
     }
 
-    @GetMapping("/getUserType")
+    @GetMapping("/user-type")
     public ResponseEntity<String> getUserType() {
         String login = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        User user = repository.findByLogin(login).get();
+        User user = userService.findByLogin(login).get();
         if(patientService.findById(user.getId()).isPresent()){
             return ResponseEntity.ok("PATIENT");
         }
@@ -68,14 +62,14 @@ public class UserController {
 
     @GetMapping("/listAll")
     public ResponseEntity<List<User>> listAll() {
-        return ResponseEntity.ok(repository.findAll());
+        return ResponseEntity.ok(userService.findAll());
     }
 
     @GetMapping("/validPass")
     public ResponseEntity<Boolean> validPass(@RequestParam String login,
                                                 @RequestParam String password) {
 
-        Optional<User> optuser = repository.findByLogin(login);
+        Optional<User> optuser = userService.findByLogin(login);
         if (optuser.isEmpty()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
         }

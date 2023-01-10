@@ -2,9 +2,9 @@ package com.challenge.conexa.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
 import com.challenge.conexa.model.Appointment;
 import com.challenge.conexa.model.AppointmentDTO;
 import com.challenge.conexa.model.Patient;
@@ -12,19 +12,15 @@ import com.challenge.conexa.model.User;
 import com.challenge.conexa.repository.AppointmentRepository;
 import com.challenge.conexa.repository.UserRepository;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Service
 public class AppointmentService {
-    @Autowired
-    private AppointmentRepository appointmentRepository;
-
-    @Autowired
-    private PatientService patientService;
-
-    @Autowired
-    private ProfessionalService professionalService;
-
-    @Autowired
-    private UserRepository userRepository;
+    private final AppointmentRepository appointmentRepository;
+    private final PatientService patientService;
+    private final ProfessionalService professionalService;
+    private final UserRepository userRepository;
 
     public List<Appointment> findAllByProfessionalId(Long id) {
         return appointmentRepository.findAllByProfessionalId(id);
