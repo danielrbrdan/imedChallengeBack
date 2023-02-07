@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.challenge.conexa.model.Patient;
+import com.challenge.conexa.models.entity.Patient;
 
 
 @Repository

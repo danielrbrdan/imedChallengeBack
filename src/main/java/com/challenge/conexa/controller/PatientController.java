@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.conexa.model.Patient;
+import com.challenge.conexa.models.dto.PatientDTO;
 import com.challenge.conexa.service.PatientService;
+import com.challenge.conexa.utils.Mapper;
 
 import lombok.AllArgsConstructor;
 
@@ -18,9 +19,15 @@ import lombok.AllArgsConstructor;
 @RequestMapping(value = "/patient")
 public class PatientController {
     private final PatientService patientService;
+    
+    private final Mapper mapper;
+
 
     @RequestMapping(value = "/find-patients", method = RequestMethod.GET)
-    public ResponseEntity<List<Patient>> findPatients(@RequestParam String name, @RequestParam String statusOnline) {
-        return ResponseEntity.ok().body(patientService.findPatients(name,statusOnline));
+    public ResponseEntity<List<PatientDTO>> findPatients(@RequestParam String name, @RequestParam String statusOnline) {
+        List<PatientDTO> patientsDTO = 
+            this.mapper.mapList(patientService.findPatients(name,statusOnline), PatientDTO.class);
+            
+        return ResponseEntity.ok().body(patientsDTO);
     }
 }

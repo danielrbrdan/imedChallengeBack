@@ -7,10 +7,13 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+
 import com.challenge.conexa.controller.AppointmentController;
 import com.challenge.conexa.controller.UserController;
-import com.challenge.conexa.model.Patient;
-import com.challenge.conexa.model.Professional;
+import com.challenge.conexa.models.entity.Patient;
+import com.challenge.conexa.models.entity.Professional;
 import com.challenge.conexa.repository.ProfessionalRepository;
 import com.challenge.conexa.repository.UserRepository;
 import com.challenge.conexa.service.PatientService;
@@ -19,8 +22,6 @@ import com.challenge.conexa.service.UserDetailServiceImpl;
 import com.google.gson.Gson;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.module.mockmvc.RestAssuredMockMvc;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest

@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.conexa.model.Patient;
-import com.challenge.conexa.model.Professional;
-import com.challenge.conexa.model.User;
+import com.challenge.conexa.models.dto.PatientDTO;
+import com.challenge.conexa.models.dto.ProfessionalDTO;
+import com.challenge.conexa.models.dto.UserDTO;
+import com.challenge.conexa.models.entity.Patient;
+import com.challenge.conexa.models.entity.Professional;
+import com.challenge.conexa.models.entity.User;
 import com.challenge.conexa.service.PatientService;
 import com.challenge.conexa.service.ProfessionalService;
 import com.challenge.conexa.service.UserService;
+import com.challenge.conexa.utils.Mapper;
 
 import lombok.AllArgsConstructor;
 
@@ -28,21 +32,28 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
     private final UserService userService;
     private final PatientService patientService;
     private final ProfessionalService professionalService;
     private final PasswordEncoder encoder;
+    private final Mapper mapper;
+
 
     @PostMapping("/professional")
-    public ResponseEntity<Professional> save(@RequestBody Professional professional) {
+    public ResponseEntity<ProfessionalDTO> save(@RequestBody Professional professional) {
         professional.setPassword(encoder.encode(professional.getPassword()));
-        return ResponseEntity.ok(professionalService.save(professional));
+        ProfessionalDTO professionalDTO = mapper.map(professionalService.save(professional), ProfessionalDTO.class);
+
+        return ResponseEntity.ok(professionalDTO);
     }
 
     @PostMapping("/patient")
-    public ResponseEntity<Patient> save(@RequestBody Patient patient) {
+    public ResponseEntity<PatientDTO> save(@RequestBody Patient patient) {
         patient.setPassword(encoder.encode(patient.getPassword()));
-        return ResponseEntity.ok(patientService.save(patient));
+        PatientDTO patientDTO = mapper.map(patientService.save(patient), PatientDTO.class);
+
+        return ResponseEntity.ok(patientDTO);
     }
 
     @GetMapping("/user-type")
@@ -57,15 +68,18 @@ public class UserController {
             return ResponseEntity.ok("PROFESSIONAL");
         }
 
-        return null;
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/listAll")
-    public ResponseEntity<List<User>> listAll() {
-        return ResponseEntity.ok(userService.findAll());
+    @GetMapping()
+    public ResponseEntity<List<UserDTO>> listAll() {
+        List<UserDTO> usersDTO = 
+            this.mapper.mapList(userService.findAll(), UserDTO.class);
+
+        return ResponseEntity.ok(usersDTO);
     }
 
-    @GetMapping("/validPass")
+    @GetMapping("/valid_pass")
     public ResponseEntity<Boolean> validPass(@RequestParam String login,
                                                 @RequestParam String password) {
 

@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.challenge.conexa.model.User;
+import com.challenge.conexa.models.entity.User;
 import com.challenge.conexa.repository.UserRepository;
 
 import lombok.AllArgsConstructor;

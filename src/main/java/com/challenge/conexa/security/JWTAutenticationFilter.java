@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.challenge.conexa.data.UserDetailData;
-import com.challenge.conexa.model.User;
+import com.challenge.conexa.models.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 

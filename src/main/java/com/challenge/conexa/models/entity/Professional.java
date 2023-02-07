@@ -1,10 +1,10 @@
-package com.challenge.conexa.model;
+package com.challenge.conexa.models.entity;
 
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -12,15 +12,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
+
 @Data
 @Entity
-@Table(name = "patient")
-public class Patient extends User{
+@Table(name = "professional")
+public class Professional extends User{
     private String name;
-
-    @Column(name="total_appointment")
-    private Long totalAppointment = (long) 0;
-    private String onlineStatus;
+    private String crm;
+    private String status;
+    private String rating;
 
     @OneToMany(
         mappedBy = "professional",
@@ -30,4 +30,11 @@ public class Patient extends User{
     @JsonIgnore
     private List<Appointment> appointments;
 
+    @OneToMany(
+        fetch = FetchType.EAGER,
+        mappedBy = "professional",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Insurance> insurances;
 }

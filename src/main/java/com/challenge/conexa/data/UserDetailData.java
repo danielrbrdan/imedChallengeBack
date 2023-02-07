@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.challenge.conexa.model.User;
+import com.challenge.conexa.models.entity.User;
 
 
 public class UserDetailData implements UserDetails {

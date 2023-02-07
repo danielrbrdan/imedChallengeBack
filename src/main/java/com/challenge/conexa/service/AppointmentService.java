@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.challenge.conexa.model.Appointment;
-import com.challenge.conexa.model.AppointmentDTO;
-import com.challenge.conexa.model.Patient;
-import com.challenge.conexa.model.User;
+import com.challenge.conexa.models.dto.AppointmentDTO;
+import com.challenge.conexa.models.entity.Appointment;
+import com.challenge.conexa.models.entity.Patient;
+import com.challenge.conexa.models.entity.User;
 import com.challenge.conexa.repository.AppointmentRepository;
 import com.challenge.conexa.repository.UserRepository;
 

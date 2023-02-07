@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.challenge.conexa.data.UserDetailData;
-import com.challenge.conexa.model.User;
+import com.challenge.conexa.models.entity.User;
 import com.challenge.conexa.repository.UserRepository;
 
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.challenge.conexa.model;
+package com.challenge.conexa.models.entity;
 
 import java.time.ZonedDateTime;
 

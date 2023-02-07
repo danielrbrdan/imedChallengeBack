@@ -1,7 +1,8 @@
-package com.challenge.conexa.model;
+package com.challenge.conexa.models.entity;
 
 import java.time.ZonedDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,23 +16,32 @@ import org.hibernate.annotations.CreationTimestamp;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Entity
-@Table(name = "insurance")
+@Table(name = "appointment")
 @Getter
 @Setter
-public class Insurance {
+public class Appointment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) 
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long appointmentId;
 
     @CreationTimestamp
     private ZonedDateTime date_created;
+
+    @Column(nullable = false)
+    private String date;
+
+    @Column(nullable = false)
+    private String time;
     
-    private String name;
-    private String cnpj;
-    private String price;
+    @ManyToOne
+    @JoinColumn(name="patient_id")
+    private Patient patient;
 
     @ManyToOne
     @JoinColumn(name="professional_id")
     private Professional professional;
+
+    
 }
